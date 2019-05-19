@@ -43,7 +43,7 @@ void fileread(int n) {
 		printf("File doesn't exist\n");
 		return; // прерываем выполнение функции, возвращаемся
 	}
-	if (fread(input, sizeof(int), n, fp) != 5) { // читаем, проверяем
+	if (fread(input, sizeof(int), n, fp) != n) { // читаем, проверяем
 		if (feof(fp))
 			printf("Premature end of file.");
 		else
