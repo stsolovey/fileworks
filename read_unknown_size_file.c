@@ -1,8 +1,14 @@
-//#include "pch.h"
-//#define _CRT_SECURE_NO_WARNINGS
+#include "pch.h"
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+/*
+ * Записываем в файл массив.
+ * Считаем количество элементов массива в файле.
+ * Читаем из файла в другой массив.
+ */
 void clear(void) {
 	while (getchar() != '\n'); // очистка буфера консольного ввода
 }
@@ -36,7 +42,8 @@ void writeToFile(FILE *fp, int *arr, int n) {
 	}else {
 		puts("Error writing file !");
 		return;
-	}	
+	}
+	rewind(fp); // возвращаем указатель в начало файла
 }
 
 // читаем из файла в массив известное количество элементов
@@ -47,6 +54,7 @@ void readFromFile(FILE *fp, int *arr, int n) {
 	else {
 		puts("Error reading file");
 	}
+	rewind(fp); // возвращаем указатель в начало файла
 }
 
 // печатаем в консоль массив
@@ -85,18 +93,13 @@ int main() {
 	// пишем в файл из массива А
 	fp = fopening(fname);
 	writeToFile(fp, A, 4);
-	fclose(fp);
 
 	// считаем количество элементов в файле, зная тип данных
-	fp = fopening(fname);
 	countNumberOfElements(fp, noe);
-	fclose(fp);
 
 	// читаем из файла в массив B
-	fp = fopening(fname);
 	readFromFile(fp, B, noe);
 	fclose(fp);
-
 
 	// печатаем оба массива
 	printingArr(A, 4);
